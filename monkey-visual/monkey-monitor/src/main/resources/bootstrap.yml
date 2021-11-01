@@ -1,0 +1,21 @@
+server:
+  port: 5001
+
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:monkey-register}:${NACOS_PORT:8848}
+        namespace: ${NACOS_SPACE:268e4bab-a79e-4237-b3ca-2df4c58b81d8}
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: ${NACOS_SPACE:268e4bab-a79e-4237-b3ca-2df4c58b81d8}
+        file-extension: yml
+        shared-configs:
+          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+  profiles:
+    active: @profiles.active@
+  autoconfigure:
+    exclude: com.pig4cloud.pig.common.core.config.JacksonConfiguration #排除全局Jackson配置，避免admin server时间显示问题

@@ -1,0 +1,16 @@
+server:
+  port: 5003
+  servlet:
+    encoding:
+      force: true
+
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:monkey-register}:${NACOS_PORT:8848}
+        namespace: ${NACOS_SPACE:268e4bab-a79e-4237-b3ca-2df4c58b81d8}
+  profiles:
+    active: @profiles.active@
